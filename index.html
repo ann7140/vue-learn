@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="format-detection" content="telphone=no, email=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <title>movie</title>
+    <script>
+      var lastSize = 16,
+        bodyElement = document.documentElement || document.body,
+        html = document.getElementsByTagName("html")[0],
+        RC = {
+          w: 1080,
+          h: 1206
+        },
+        GC = {
+          w: document.documentElement.clientWidth || window.innerWidth || screen.width,
+          h: document.documentElement.clientHeight || window.innerHeight || screen.height
+        },
+        app = getQueryString('lagoufrom'),
+        checkStatus = false,
+        initStatus = false;
+
+      function getQueryString(parm) {
+        var reg = new RegExp("(^|&)" + parm + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+
+        if (r != null) return unescape(r[2]);
+        return null;
+      }
+      function setFontSize() {
+        var portrait = false,
+          resize = "orientationchange" in window ? window.orientationchange : window.resize,
+          rightSize = parseFloat((RC.w / RC.h).toFixed(1)),
+          currentSize = parseFloat((GC.w / GC.h).toFixed(1)),
+          lastHTMLSize = 16;
+
+        try {
+          //横屏： "(orientation: landscape)"
+          //竖屏： "(orientation: portrait)"
+          portrait = window.matchMedia("(orientation: portrait)").matches;
+        } catch (e) { }
+
+        // if(portrait){
+        
+        if(rightSize > currentSize){  // 长屏
+            lastHTMLSize = 16;
+        }else if(rightSize < currentSize){  //宽屏
+            lastHTMLSize = (RC.h / GC.h * GC.w) / RC.w * 16;// + 4;
+            // if(app == 'ios' || app == 'android'){
+            //     lastHTMLSize = (RC.h / GC.h * GC.w) / RC.w * 16 + 2;
+            // }
+
+        }else if(/(Mi-4c)/g.test(navigator.userAgent)){
+            lastHTMLSize = lastHTMLSize + 2;
+        }else if(/(MI 5s)/gi.test(navigator.userAgent)){
+            if(app == 'ios' || app == 'android'){
+                lastHTMLSize = lastHTMLSize + 2.5;
+            }
+        }
+        
+        lastSize = lastHTMLSize;
+        // alert(GC.w);
+        // alert(lastHTMLSize);
+        html.style.fontSize=GC.w/lastHTMLSize+'px';
+
+        // }else{
+        //     var ff = 750 * document.documentElement.clientWidth / document.documentElement.clientHeight
+        //     alert(ff);
+        //     html.style.fontSize = window.innerWidth / ff * 16+'px';
+        // }
+      }
+
+      setFontSize();
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

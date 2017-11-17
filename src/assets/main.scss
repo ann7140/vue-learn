@@ -1,0 +1,65 @@
+@charset "UTF-8";
+@function rem($n) {
+    @return $n / (1080 / 16)+rem;
+}
+
+@function getTop($n) {
+    @return ($n - 1206 / 2) / (1080 / 16)+rem;
+}
+
+@function getLeft($n) {
+    @return ($n - 1080 / 2) / (1080 / 16)+rem;
+}
+
+@function getRight($n) {
+    @return (($n - 1080) / 2) / (1080 / 16)+rem;
+}
+
+@mixin center($left, $top) { //左右居中 上变
+    position: absolute;
+    left: 50%;
+    top: rem($top);
+    margin: 0 0 0 getLeft($left);
+}
+
+@mixin centerlt($left, $top) { //上下，左右居中 
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: getTop($top) 0 0 getLeft($left);
+}
+@mixin centerrt($right, $top) { //上下，左右居中 
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    margin: getTop($top) getRight($right) 0 0;
+}
+@mixin middlert($right, $top) { //上下居中 右变
+    position: absolute;
+    right: rem($right);
+    top: 50%;
+    margin: getTop($top) 0 0 0;
+}
+
+@mixin centerb($left, $bottom) { //左右居中 下变
+    position: absolute;
+    left: 50%;
+    bottom: rem($bottom);
+    margin: 0 0 0 getLeft($left);
+}
+
+@mixin leftTop($left, $top) { //左变 上变
+    position: absolute;
+    left: rem($left);
+    top: rem($top);
+}
+@mixin rightTop($right, $top) { //右变 上变
+    position: absolute;
+    right: rem($right);
+    top: rem($top);
+}
+@mixin leftBottom($left, $bottom) { //右变 上变
+    position: absolute;
+    left: rem($left);
+    bottom: rem($bottom);
+}
