@@ -21,7 +21,8 @@ npm run build --report
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
 
 
-other install:
+> other install:
+``` bash
 npm install -g vue-cli
 mkdir my-project && cd my-project
 npm init
@@ -42,3 +43,4 @@ npm install --save-dev babel-loader babel-core babel-preset-env webpack
 npm install html-webpack-plugin --save-dev ( 安装html-webpack-plugin插件 )
 npm install express --save-dev
 npm install element-ui --save-dev
+```
